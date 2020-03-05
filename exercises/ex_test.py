@@ -29,7 +29,6 @@ class TestEx1(unittest.TestCase):
                                                     'Ice Age'], f"Exercise 1 - accept to receive ['Madagascar: Escape 2 Africa', 'Madagascar', 'Big Nothing', 'Ice Age'] when searching for movies between 80 to 90 minutes, but received '{find_movies_by_dur_range(80, 90)}' instead"
         assert find_movies_by_dur_range(0,
                                         60) == [], f"Exercise 1 - accept to receive [] when searching for movies between 0 to 60 minutes, but received '{find_movies_by_dur_range(0, 60)}' instead"
-    def test2_ex1(self):
         assert find_movies_by_dur_range(118, 120) == ['Looper', 'The Beach', 'Match Point', 'American History X',
                                                     'Birdman or (The Unexpected Virtue of Ignorance)'], f"Exercise 1 - accept to receive ['Looper', 'The Beach', 'Match Point', 'American History X', 'Birdman or (The Unexpected Virtue of Ignorance)'] when searching for movies between 118 to 120 minutes, but received '{find_movies_by_dur_range(118, 120)}' instead"
 class TestEx2(unittest.TestCase):
