@@ -11,14 +11,14 @@ evaluation_loc = os.path.join(__location__, 'src', 'exercises.py')
 find_movies_by_dur_range = SourceFileLoader("find_movies_by_dur_range",
                                             evaluation_loc).load_module().find_movies_by_dur_range
 # get find_movies_by_year_and_genre
-find_movies_by_year_and_genre = SourceFileLoader("find_movies_by_dur_range",
+find_movies_by_year_and_genre = SourceFileLoader("find_movies_by_year_and_genre",
                                                  evaluation_loc).load_module().find_movies_by_year_and_genre
 
 # get find_num_of_movies_by_actors
-find_num_of_movies_by_actors = SourceFileLoader("find_movies_by_dur_range",
+find_num_of_movies_by_actors = SourceFileLoader("find_num_of_movies_by_actors",
                                                 evaluation_loc).load_module().find_num_of_movies_by_actors
 # get count_movies_by_genres
-count_movies_by_genres = SourceFileLoader("find_movies_by_dur_range",
+count_movies_by_genres = SourceFileLoader("count_movies_by_genres",
                                           evaluation_loc).load_module().count_movies_by_genres
 
 
