@@ -1,1 +1,1 @@
-# python-activity-checks
+# excel-fundamentals checks. 
