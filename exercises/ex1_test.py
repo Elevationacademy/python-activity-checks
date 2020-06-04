@@ -5,8 +5,9 @@ import openpyxl as oxl
 
 from .BikeStoreModel import BikeStoreSheetCols
 
-wb_data = oxl.load_workbook('../Excel/Fundementals/Solution/BikeStoreSample.xlsx', read_only=True, data_only=True)
-wb_formulas = oxl.load_workbook('../Excel/Fundementals/Solution/BikeStoreSample.xlsx', read_only=True, data_only=False)
+print(os.getcwd())
+wb_data = oxl.load_workbook('Solution/BikeStoreSample.xlsx', read_only=True, data_only=True)
+wb_formulas = oxl.load_workbook('Solution/BikeStoreSample.xlsx', read_only=True, data_only=False)
 
 ws = wb_formulas['OrderDetailsData']
 ws_data = wb_data['OrderDetailsData']
