@@ -5,15 +5,14 @@ import openpyxl as oxl
 
 from .BikeStoreModel import BikeStoreSheetCols
 
-print(os.getcwd())
-wb_data = oxl.load_workbook('Solution/BikeStoreSample.xlsx', read_only=True, data_only=True)
-wb_formulas = oxl.load_workbook('Solution/BikeStoreSample.xlsx', read_only=True, data_only=False)
+wb_data = oxl.load_workbook('../Excel/Fundementals/Solution/BikeStoreSample.xlsx', read_only=True, data_only=True)
+wb_formulas = oxl.load_workbook('../Excel/Fundementals/Solution/BikeStoreSample.xlsx', read_only=True, data_only=False)
 
 ws = wb_formulas['OrderDetailsData']
 ws_data = wb_data['OrderDetailsData']
 row_count = ws.max_row
 
-class TestExcelFile(unittest.TestCase):
+class TestEx1(unittest.TestCase):
     def test_ColumnListPrice(self):
         for row in ws.iter_rows(min_row=2, max_row=row_count - 1):
             cell = row[BikeStoreSheetCols.ListPrice.value]
