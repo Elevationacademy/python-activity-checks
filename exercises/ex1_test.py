@@ -1,5 +1,5 @@
 import unittest
-from BikeStoreModel import *
+from .BikeStoreModel import *
 
 
 class TestEx1(unittest.TestCase):

@@ -1,5 +1,5 @@
 import openpyxl as oxl
-from BikeStoreModel import *
+from .BikeStoreModel import *
 import unittest
 
 
