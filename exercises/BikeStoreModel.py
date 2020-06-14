@@ -1,7 +1,7 @@
 import enum
 import openpyxl as oxl
 
-workbook_file = '../Solution/BikeStoreSample.xlsx'
+workbook_file = '/home/excel.xlsx'
 
 wb_data = oxl.load_workbook(workbook_file, read_only=False, data_only=True)
 wb_formulas = oxl.load_workbook(workbook_file, read_only=True, data_only=False)
