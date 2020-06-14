@@ -58,5 +58,5 @@ class TestEx3(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "COUNTIF" in formula_cell.value or "SUMIF" in formula_cell.value , f"cell {cell.coordinate} formula contain SUMIF or COUNTIF"
+        assert "COUNTIF" in formula_cell.value or "SUMIF" in formula_cell.value , f"cell {cell.coordinate} formula should contain SUMIF or COUNTIF"
         assert str(row_count - 1) in formula_cell.value, f"cell {cell.coordinate} formula should reference row {str(row_count - 1)}"
