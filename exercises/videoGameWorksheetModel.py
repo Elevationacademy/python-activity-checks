@@ -1,7 +1,7 @@
 import enum
 import openpyxl as oxl
 
-workbook_file = '/home/Solution/vgsales.xlsx'
+workbook_file = '/home/excel.xlsx'
 
 wb_data = oxl.load_workbook(workbook_file, read_only=False, data_only=True)
 wb_formulas = oxl.load_workbook(workbook_file, read_only=True, data_only=False)
@@ -24,12 +24,12 @@ class VideoGameSalesSheetCols(enum.Enum):
     GlobalSales = 11
 
 
-class VideoGameDetails
-    def __init__(self, row):
-        self.Year = row[VideoGameSalesSheetCols.Year].value
-        self.Genre = row[VideoGameSalesSheetCols.Year].value
-        self.Platform = row[VideoGameSalesSheetCols.Year].value
-        self.Publisher = row[VideoGameSalesSheetCols.Year].value
-        self.Rank = row[VideoGameSalesSheetCols.Year].value
+#class VideoGameDetails
+#    def __init__(self, row):
+#        self.Year = row[VideoGameSalesSheetCols.Year].value
+#        self.Genre = row[VideoGameSalesSheetCols.Year].value
+#        self.Platform = row[VideoGameSalesSheetCols.Year].value
+#        self.Publisher = row[VideoGameSalesSheetCols.Year].value
+#        self.Rank = row[VideoGameSalesSheetCols.Year].value
 
 
