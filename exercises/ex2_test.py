@@ -50,3 +50,11 @@ class TestEx2(unittest.TestCase):
             actual_count += 1
 
         assert expected_count == actual_count, f"'Eighties' tab rows count after filter should be {expected_count} but it is {actual_count} "
+
+    def checkConditionalFormatting(self, ws_idx):
+        worksheet = wb_data[ws_idx]
+        assert len(worksheet.conditional_formatting) > 0, f"There is no conditional formatting in tab {ws_idx}"
+
+    def test_conditionalFormatting(self):
+        self.checkConditionalFormatting('Eighties')
+        self.checkConditionalFormatting('Strategy')
