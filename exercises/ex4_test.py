@@ -2,6 +2,7 @@ import openpyxl as oxl
 from .videoGameWorksheetModel import *
 import unittest
 
+
 class TestEx4(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestEx4, self).__init__(*args, **kwargs)
@@ -23,32 +24,32 @@ class TestEx4(unittest.TestCase):
 
     def test_PlatformColumn(self):
         formula_cell = self.worksheet_formula['A2']
-        assert 'UNIQUE' in formula_cell.value,  f"formula in cell {formula_cell.coordinate} should include UNIQUE in" \
-                                                f" it's formula"
-        assert 'vgsales!' in formula_cell.value,  f"formula in cell {formula_cell.coordinate} should include reference to " \
-                                                  f"vgsales tab"
+        assert 'UNIQUE' in formula_cell.value, f"formula in cell {formula_cell.coordinate} should include UNIQUE in" \
+                                               f" it's formula"
+        assert 'vgsales!' in formula_cell.value, f"formula in cell {formula_cell.coordinate} should include reference to " \
+                                                 f"vgsales tab"
 
     def test_YearsHeader(self):
         formula_cell = self.worksheet_formula['B1']
-        assert 'UNIQUE' in formula_cell.value,  f"formula in cell {formula_cell.coordinate} should include UNIQUE in" \
-                                                f" it's formula"
-        assert 'TRANSPOSE' in formula_cell.value,  f"formula in cell {formula_cell.coordinate} should include TRANSPOSE in" \
-                                                f" it's formula"
-        assert 'vgsales!' in formula_cell.value,  f"formula in cell {formula_cell.coordinate} should include reference to " \
-                                                  f"vgsales tab"
-
+        assert 'UNIQUE' in formula_cell.value, f"formula in cell {formula_cell.coordinate} should include UNIQUE in" \
+                                               f" it's formula"
+        assert 'TRANSPOSE' in formula_cell.value, f"formula in cell {formula_cell.coordinate} should include TRANSPOSE in" \
+                                                  f" it's formula"
+        assert 'vgsales!' in formula_cell.value, f"formula in cell {formula_cell.coordinate} should include reference to " \
+                                                 f"vgsales tab"
 
     def test_TotalIncomes(self):
         for row in self.worksheet_data.iter_rows(min_row=2, max_row=row_count):
-            if row[0].value == None:
+            if row[0].value is None:
                 break
             for cell in row[1:]:
                 year = self.worksheet_data[1][cell.column - 1].value
                 platform = str(self.worksheet_data[cell.row][0].value)
-#                print(cell.coordinate, year, platform)
-                expected_val = 0 if platform not in self.expected_platform_sums[year] else self.expected_platform_sums[year][platform]
+                #                print(cell.coordinate, year, platform)
+                expected_val = 0 if platform not in self.expected_platform_sums[year] else \
+                    self.expected_platform_sums[year][platform]
                 assert expected_val == cell.value, f"income on Platform {platform} on year {year} should be {expected_val}" \
-                    f"but it is {cell.value}"
+                                                   f"but it is {cell.value}"
 
     def test_TestLineChart(self):
         pass
