@@ -52,4 +52,6 @@ class TestEx4(unittest.TestCase):
                                                    f"but it is {cell.value}"
 
     def test_TestLineChart(self):
-        pass
+        assert len(self.worksheet_data._charts) > 0, f"'PlatformByYear' does not contain any chart"
+        assert len(self.worksheet_data._charts) < 2, f"'PlatformByYear' should have only 1 chart"
+        assert self.worksheet_data._charts[0].tagname == 'scatterChart', f"'PlatformByYear' chart type should be 'line/Scatter chart'"

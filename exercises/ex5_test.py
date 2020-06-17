@@ -28,7 +28,6 @@ class TestEx5(unittest.TestCase):
 
         for d in self.expected_genres_avgs:
             for g in self.expected_genres_avgs[d]:
-#                print(d, g, self.expected_genres_avgs[d][g])
                 self.expected_genres_avgs[d][g] /= float(expected_genres_counts[d][g])
 
 
@@ -61,4 +60,6 @@ class TestEx5(unittest.TestCase):
                                                    f"{expected_val} but it is {cell.value}"
 
     def test_BarCharts(self):
-        pass
+        assert len(self.worksheet_data._charts) > 0, f"'GenrePerDecade' does not contain any chart"
+        assert len(self.worksheet_data._charts) < 2, f"'GenrePerDecade' should have only 1 chart"
+        assert self.worksheet_data._charts[0].tagname == 'barChart', f"'GenrePerDecade' chart type should be 'bar charts'"

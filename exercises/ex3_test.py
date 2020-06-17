@@ -70,4 +70,7 @@ class TestEx3(unittest.TestCase):
                                                               f"should be {expected_genres_sums[genre]}"
 
     def test_PieChart(self):
-        pass
+        assert len(self.worksheet_data._charts) > 0, f"'Genres' tab does not contain any chart"
+        assert len(self.worksheet_data._charts) == 2, f"'Genres' tab should have only 2 chart"
+        assert self.worksheet_data._charts[0].tagname == 'pieChart', \
+            f"'Genres' tab chart type should be 'pie chart'"
