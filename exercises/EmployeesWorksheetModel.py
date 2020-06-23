@@ -78,7 +78,10 @@ class EmployeesDb:
     def fetch_salaries(self):
         ws_e = wb_data['salaries']
         for row in ws_e.iter_rows(min_row=2, max_row=ws_e.max_row):
-            self.collection[row[0].value] = EmployeeDetails(row)
+            to_date = row[3].value
+            if to_date.year == 9999: # only take the last salary
+                self.collection[row[0].value].Salary = row[1].value
+
 
     def fetch_departments(self):
         ws_e = wb_data['department']

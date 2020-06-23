@@ -39,4 +39,11 @@ class TestEx1(unittest.TestCase):
         pass
 
     def test_SalariesColumn(self):
-        pass
+        self.check_col_formula(EmployeesDataCols.Salary.value, ['salaries'], ['VLOOKUP'])
+        employees_db.fetch_salaries()
+        for row in ws_data.iter_rows(min_row=2, max_row=row_count):
+            salary = row[EmployeesDataCols.Salary.value].value
+            emp_no = row[EmployeesDataCols.No.value].value
+            expected_value = employees_db.collection[emp_no].Salary
+            assert salary == expected_value, f" Wrong value in row {row[0].row - 1}" \
+                                             f" found {salary} expecting {expected_value}"
