@@ -1,60 +1,31 @@
 import unittest
-from .videoGameWorksheetModel import *
+from .EmployeesWorksheetModel import *
 
 
 class TestEx2(unittest.TestCase):
-    def test_StrategyTabTableValues(self):
-        # check on the source data how many Strategy games we have.
-        expected_count = 0
-        for row in ws.iter_rows(min_row=2, max_row=row_count - 1):
-            expected_count += 1 if row[VideoGameSalesSheetCols.Genre.value].value == "Strategy" else 0
 
-        actual_count = 0
-        sum_ws = wb_data['Strategy']
-        for row in sum_ws.iter_rows(min_row=2, max_row=sum_ws.max_row - 1):
-            cell = row[VideoGameSalesSheetCols.Genre.value]
-            assert cell.value == 'Strategy', f"row  {cell.row} contains game from year {cell.value}"
-            actual_count += 1
+    def test_PivotTablesExistence(self):
+        actual = len(ws_data._pivots)
+        expected = 3
+        assert actual == expected, f"The Employee Worksheet should include {expected} pivot tables, but it include {actual}"
 
-        assert expected_count == actual_count, f"rows count after filter should be {expected_count} but it is {actual_count} "
-
-
-    def test_SortFormula(self):
-        self.checkSortFormula('Eighties')
-        self.checkSortFormula('Strategy')
-
-    def checkSortFormula(self, ws_idx):
-        sum_ws = wb_formulas[ws_idx]
-        cell = sum_ws['A2']
-        assert cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert 'SORT' in cell.value, f"cell {cell.coordinate} formula should include SORT function"
-        assert 'FILTER' in cell.value, f"cell {cell.coordinate} formula should include FILTER function"
-        assert 'vgsales!' in cell.value, f"cell {cell.coordinate} formula should include refrence to vgsales Tab"
+    def assert_pivot_exists(self, pivot_name):
+        for pt in ws_data._pivots:
+            if pt.name == pivot_name:
+                return pt
+        assert False, f"could not find pivot table named {pivot_name}"
+        ws_src = pt.cache.cacheSource.worksheetSource
+        assert 'EmployeesData' in ws_src.sheet, f"Pivot table {pivot_name} is not referenceing EmployeesData Sheet"
 
 
-    def test_EightiesTabTableValues(self):
-        # check on the source data how many Strategy games we have.
-        expected_count = 0
-        for row in ws.iter_rows(min_row=2, max_row=row_count):
-            year = row[VideoGameSalesSheetCols.Year.value].value
-            expected_count += 1 if 1980 <= year <= 1989 else 0
+    def test_DepartmentsCountPivotTable(self):
+        pt = self.assert_pivot_exists('DepratmentsPersonalPivot')
 
-        prev_rank = 0
-        actual_count = 0
-        sum_ws = wb_data['Eighties']
-        for row in sum_ws.iter_rows(min_row=2, max_row=sum_ws.max_row):
-            rank = row[VideoGameSalesSheetCols.Rank.value - 1].value
-            assert prev_rank <= rank, f"'Eighties' tab is not ordered correctly see row {row[0].row}"
-            year = row[VideoGameSalesSheetCols.Genre.value - 1].value
-            assert 1980 <= year <= 1989, f"row  {row.cell[0].row} contains game from year {year} which is not from the eighties "
-            actual_count += 1
 
-        assert expected_count == actual_count, f"'Eighties' tab rows count after filter should be {expected_count} but it is {actual_count} "
 
-    def checkConditionalFormatting(self, ws_idx):
-        worksheet = wb_data[ws_idx]
-        assert len(worksheet.conditional_formatting) > 0, f"There is no conditional formatting in tab {ws_idx}"
+    def test_AverageSalaryPivotTable(self):
+        pt = self.assert_pivot_exists('AverageSalaryPivot')
 
-    def test_conditionalFormatting(self):
-        self.checkConditionalFormatting('Eighties')
-        self.checkConditionalFormatting('Strategy')
+
+    def test_SalaryBudget(self):
+        pt = self.assert_pivot_exists('SalaryBudgetPivot')
