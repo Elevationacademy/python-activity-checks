@@ -29,21 +29,28 @@ class TestEx1(unittest.TestCase):
         self.check_col_formula(EmployeesDataCols.Title.value, ['titles'], ['VLOOKUP'])
         employees_db.fetch_title()
         for row in ws_data.iter_rows(min_row=2, max_row=row_count):
-            title = row[EmployeesDataCols.Title.value].value
+            actual = row[EmployeesDataCols.Title.value].value
             emp_no = row[EmployeesDataCols.No.value].value
             expected_value = employees_db.collection[emp_no].Title
-            assert title == expected_value, f" Wrong value in row {row[0].row - 1}" \
-                                            f" found {title} expecting {expected_value}"
+            assert actual == expected_value, f" Wrong value in row {row[0].row - 1}" \
+                                            f" found {actual} expecting {expected_value}"
 
     def test_DepartmentColumn(self):
-        pass
+        self.check_col_formula(EmployeesDataCols.Department.value, ['dept_emp'], ['VLOOKUP'])
+        employees_db.fetch_departments()
+        for row in ws_data.iter_rows(min_row=2, max_row=row_count):
+            actual = row[EmployeesDataCols.Department.value].value
+            emp_no = row[EmployeesDataCols.No.value].value
+            expected_value = employees_db.collection[emp_no].Department
+            assert actual == expected_value, f" Wrong value in row {row[0].row - 1}" \
+                                             f" found {actual} expecting {expected_value}"
 
     def test_SalariesColumn(self):
         self.check_col_formula(EmployeesDataCols.Salary.value, ['salaries'], ['VLOOKUP'])
         employees_db.fetch_salaries()
         for row in ws_data.iter_rows(min_row=2, max_row=row_count):
-            salary = row[EmployeesDataCols.Salary.value].value
+            actual = row[EmployeesDataCols.Salary.value].value
             emp_no = row[EmployeesDataCols.No.value].value
             expected_value = employees_db.collection[emp_no].Salary
-            assert salary == expected_value, f" Wrong value in row {row[0].row - 1}" \
-                                             f" found {salary} expecting {expected_value}"
+            assert actual == expected_value, f" Wrong value in row {row[0].row - 1}" \
+                                             f" found {actual} expecting {expected_value}"
