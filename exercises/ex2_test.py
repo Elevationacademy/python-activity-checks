@@ -20,11 +20,15 @@ class TestEx2(unittest.TestCase):
         actual_subtotal = p.dataFields[0].subtotal
         assert actual_subtotal == expected_subtotal, f"Pivot table {pivot_name} sub total " \
                                                      f"should be {expected_subtotal} but it {actual_subtotal}"
+
+        assert len(p.pivotFields) >= 9, "Please make sure that all columns are references by the Pivot Table"
+
         assert p.rowFields[0].x == rowField, f"Pivot table {pivot_name} is not using the correct column for the row labels"
         if colField != -1:
             assert p.colFields[0].x == colField, f"Pivot table {pivot_name} is not using the correct column for the col labels"
         if dataField != -1:
             assert p.dataFields[0].fld == dataField, f"Pivot table {pivot_name} is not using the correct colunm for the Data"
+
 
         return p
 
