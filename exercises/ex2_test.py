@@ -9,7 +9,7 @@ class TestEx2(unittest.TestCase):
         expected = 3
         assert actual == expected, f"The Employee Worksheet should include {expected} pivot tables, but it include {actual}"
 
-    def assert_pivot_valid(self, pivot_name, expected_subtotal, rowField, colField):
+    def assert_pivot_valid(self, pivot_name, expected_subtotal, rowField, colField, dataField = -1):
         p = None
         for pt in ws_data._pivots:
             if pt.name == pivot_name:
@@ -23,6 +23,9 @@ class TestEx2(unittest.TestCase):
         assert p.rowFields[0].x == rowField, f"Pivot table {pivot_name} is not using the correct column for the row labels"
         if colField != -1:
             assert p.colFields[0].x == colField, f"Pivot table {pivot_name} is not using the correct column for the col labels"
+        if dataField != -1:
+            assert p.dataFields[0].fld == dataField, f"Pivot table {pivot_name} is not using the correct colunm for the Data"
+
         return p
 
     def test_DepartmentsCountPivotTable(self):
@@ -30,7 +33,7 @@ class TestEx2(unittest.TestCase):
 
 
     def test_AverageSalaryPivotTable(self):
-        pt = self.assert_pivot_valid('AverageSalaryPivot', 'average',6 , 4)
+        pt = self.assert_pivot_valid('AverageSalaryPivot', 'average',6 , 4, 8)
 
     def test_SalaryBudget(self):
-        pt = self.assert_pivot_valid('SalaryBudgetPivot', 'sum', 7, -1)
+        pt = self.assert_pivot_valid('SalaryBudgetPivot', 'sum', 7, -1, 8)
