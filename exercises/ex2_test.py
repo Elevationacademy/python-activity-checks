@@ -29,7 +29,6 @@ class TestEx2(unittest.TestCase):
         if dataField != -1:
             assert p.dataFields[0].fld == dataField, f"Pivot table {pivot_name} is not using the correct colunm for the Data"
 
-
         return p
 
     def test_DepartmentsCountPivotTable(self):
