@@ -19,7 +19,7 @@ class TestEx2(unittest.TestCase):
         ws_src = p.cache.cacheSource.worksheetSource
         assert 'EmployeesData' in ws_src.sheet, f"Pivot table {pivot_name} is not referencing EmployeesData Sheet"
         actual_subtotal = p.dataFields[0].subtotal
-        assert actual_subtotal == expected_subtotal, f"Pivot table {pivot_name} sub total " \
+        assert actual_subtotal in expected_subtotal, f"Pivot table {pivot_name} sub total " \
                                                      f"should be {expected_subtotal} but it {actual_subtotal}"
 
         assert len(p.pivotFields) >= 9, "Please make sure that all columns are references by the Pivot Table"
@@ -33,11 +33,11 @@ class TestEx2(unittest.TestCase):
         return p
 
     def test_DepartmentsCountPivotTable(self):
-        pt = self.assert_pivot_valid('DepratmentsPersonalPivot', 'count', 7, 6)
+        pt = self.assert_pivot_valid('L2', ['count', 'countNums'], 7, 6)
 
 
     def test_AverageSalaryPivotTable(self):
-        pt = self.assert_pivot_valid('AverageSalaryPivot', 'average',6 , 4, 8)
+        pt = self.assert_pivot_valid('L25', ['average'],6 , 4, 8)
 
     def test_SalaryBudget(self):
-        pt = self.assert_pivot_valid('SalaryBudgetPivot', 'sum', 7, -1, 8)
+        pt = self.assert_pivot_valid('L36', ['sum'], 7, -1, 8)
