@@ -1,14 +1,14 @@
 import enum
 import openpyxl as oxl
 
-workbook_file = '/home/excel.xlsx'
+workbook_file = '/home/excel_opened.xlsx'
 
 wb_data = oxl.load_workbook(workbook_file, read_only=False, data_only=True)
 wb_formulas = oxl.load_workbook(workbook_file, read_only=True, data_only=False)
 ws = wb_formulas['EmployeesData']
 ws_data = wb_data['EmployeesData']
-row_count = ws.max_row
-
+# row_count = ws_data.max_row
+row_count = 1001
 
 class EmployeesDataCols(enum.Enum):
     No = 0

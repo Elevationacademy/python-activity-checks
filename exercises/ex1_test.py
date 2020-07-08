@@ -1,17 +1,20 @@
 import unittest
 from .EmployeesWorksheetModel import *
 
-
 class TestEx1(unittest.TestCase):
     def test_EmployeeData(self):
+        # two option here : formula or data both are OK,
         cell = ws['A2']
-        assert cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert 'SORT' in cell.value, f"cell {cell.coordinate} formula should include SORT function"
-        assert 'Employees!' in cell.value, f"cell {cell.coordinate} formula should include reference to Employees Tab"
+        if cell.data_type == 'f':  # the user choose the formula option so we have to check if it is correct.
+            assert 'SORT' in cell.value, f"cell {cell.coordinate} formula should include SORT function"
+            assert 'Employees!' in cell.value, f"cell {cell.coordinate} formula should include reference to Employees Tab"
+
+    def test_checkEmployeeDataValues(self):
+        pass
 
     def test_TableSort(self):
         prev_no = 0
-        for row in ws_data.iter_rows(min_row=2, max_row=row_count):
+        for row in ws_data.iter_rows(min_row=2, max_row=employees_count):
             cur_no = row[EmployeesDataCols.No.value].value
             assert cur_no > prev_no, f" The EmpolyeesData Tab is not ordered as expected, row {row[0].row - 1}" \
                                      f" should come after row {row[1].row}"
@@ -33,7 +36,7 @@ class TestEx1(unittest.TestCase):
             emp_no = row[EmployeesDataCols.No.value].value
             expected_value = employees_db.collection[emp_no].Title
             assert actual == expected_value, f" Wrong value in row {row[0].row - 1}" \
-                                            f" found {actual} expecting {expected_value}"
+                                             f" found {actual} expecting {expected_value}"
 
     def test_DepartmentColumn(self):
         self.check_col_formula(EmployeesDataCols.Department.value, ['dept_emp'], ['VLOOKUP'])
