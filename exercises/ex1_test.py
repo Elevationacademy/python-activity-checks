@@ -6,7 +6,7 @@ class TestEx1(unittest.TestCase):
     def test_ColumnListPrice(self):
         for row in ws.iter_rows(min_row=2, max_row=row_count - 1):
             cell = row[BikeStoreSheetCols.ListPrice.value]
-            assert cell.data_type != 'f', f"cell {cell.coordinate} should be a formula"
+            cell_formula = ws[cell.coordinate]
             assert '"$"' in cell.number_format, f"format of {cell.coordinate} should be $"
             assert '0.00' in cell.number_format, f"format of {cell.coordinate} should be 2 digits accurate"
 
@@ -19,9 +19,9 @@ class TestEx1(unittest.TestCase):
         for row in ws_data.iter_rows(min_row=2, max_row=row_count - 1):
             cell = row[BikeStoreSheetCols.LineTotal.value]
             cell_formula = ws[cell.coordinate]
-            assert cell.data_type != 'f', f"cell {cell.coordinate} should be a formula"
+            assert cell_formula.data_type == 'f', f"cell {cell.coordinate} should be a formula"
             assert cell_formula.value == f'=F{cell.row}*G{cell.row}' or cell_formula == f'=G{cell.row}*F{cell.row}', \
-                f'cell {cell.coordinate} formula is wrong'
+                f'cell {cell.coordinate} formula is wrong found {cell_formula.value}'
             # or cell_formula == f'=G{cell.row}*F{cell.row}'
             cell_expected_val = \
                 row[BikeStoreSheetCols.Quantity.value].value * row[BikeStoreSheetCols.ListPrice.value].value
@@ -35,7 +35,7 @@ class TestEx1(unittest.TestCase):
         for row in ws_data.iter_rows(min_row=2, max_row=row_count - 1):
             cell = row[BikeStoreSheetCols.LineTotalAfterDiscount.value]
             cell_formula = ws[cell.coordinate]
-            cell.data_type != 'f', f"cell {cell.coordinate} should be a formula"
+            cell_formula.data_type != 'f', f"cell {cell.coordinate} should be a formula"
             cell_expected_val = \
                 row[BikeStoreSheetCols.Quantity.value].value * row[BikeStoreSheetCols.ListPrice.value].value * \
                 (1 - row[BikeStoreSheetCols.Discount.value].value)

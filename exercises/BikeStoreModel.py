@@ -7,7 +7,7 @@ wb_data = oxl.load_workbook(workbook_file, read_only=False, data_only=True)
 wb_formulas = oxl.load_workbook(workbook_file, read_only=True, data_only=False)
 ws = wb_formulas['OrderDetailsData']
 ws_data = wb_data['OrderDetailsData']
-row_count = ws_data.max_row
+row_count = 101
 
 
 class BikeStoreSheetCols(enum.Enum):
