@@ -10,7 +10,8 @@ class TestEx2(unittest.TestCase):
             cell_expected_val += cell.value
         cell_actual = ws_data.cell(column=BikeStoreSheetCols.LineTotal.value + 1, row=row_count)
         assert cell_actual.data_type == 'n', f"cell {cell.coordinate} type is not a number"
-        assert cell_expected_val == cell_actual.value, f"cell {cell_actual.coordinate} value should be {cell_expected_val} but it is {cell_actual.value}"
+        self.assertAlmostEqual(cell_expected_val, cell_actual.value, places=3,
+                               msg=f"cell {cell_actual.coordinate} value should be {cell_expected_val} but it is {cell_actual.value}")
         assert '"$"' in cell_actual.number_format, f"format of {cell_actual.coordinate} should be $"
         assert '0.00' in cell_actual.number_format, f"format of {cell_actual.coordinate} should be 2 digits accurate"
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
@@ -25,7 +26,8 @@ class TestEx2(unittest.TestCase):
             cell_expected_val += cell.value
         cell_actual = ws_data.cell(column=BikeStoreSheetCols.Quantity.value + 1, row=row_count)
         assert cell_actual.data_type == 'n', f"cell {cell.coordinate} type is not a number"
-        assert cell_expected_val == cell_actual.value, f"cell {cell_actual.coordinate} value should be {cell_expected_val} but it is {cell_actual.value}"
+        self.assertAlmostEqual(cell_expected_val, cell_actual.value, places=3,
+                               msg=f"cell {cell_actual.coordinate} value should be {cell_expected_val} but it is {cell_actual.value}")
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
