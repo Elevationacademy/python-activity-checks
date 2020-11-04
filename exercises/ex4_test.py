@@ -22,7 +22,7 @@ class TestEx4(unittest.TestCase):
             assert '0.00' in cell.number_format, f"format of {cell.coordinate} should be 2 digits accurate"
             year = calc_ws_data.cell(column=cell.column, row=1).value # get the year value from first row
             self.assertAlmostEqual(cell.value, expected_vals[year], places=3,
-                msg=f"cell {cell_actual.coordinate} value should be {cell.value:.2f} but it is {expected_vals[year]:.2f}")
+                msg=f"cell {cell.coordinate} value should be {cell.value:.2f} but it is {expected_vals[year]:.2f}")
             cell_formula = calc_ws[cell.coordinate]
             assert cell_formula.data_type == 'f', f"cell {cell.coordinate} should be a formula"
             assert "SUMIF" in cell_formula.value, f"cell {cell.coordinate} should formula should contain SUMIF"
