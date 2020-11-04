@@ -73,8 +73,8 @@ class TestEx2(unittest.TestCase):
         cell_expected_val /= (row_count - 2)
         cell_actual = ws_data.cell(column=BikeStoreSheetCols.DiscountPerUnit.value + 1, row=row_count)
         assert cell_actual.data_type == 'n', f"cell {cell.coordinate} type is not a number"
-		self.assertAlmostEqual(cell_expected_val, cell_actual.value, places=3,
-					   msg=f"cell {cell_actual.coordinate} value should be {cell_expected_val:.2f} but it is {cell_actual.value:.2f}")
+        self.assertAlmostEqual(cell_expected_val, cell_actual.value, places=3,
+            msg=f"cell {cell_actual.coordinate} value should be {cell_expected_val:.2f} but it is {cell_actual.value:.2f}")
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
