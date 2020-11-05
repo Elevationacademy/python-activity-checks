@@ -29,7 +29,7 @@ class TestEx2(unittest.TestCase):
         assert cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
         assert 'SORT' in cell.value, f"cell {cell.coordinate} formula should include SORT function"
         assert 'FILTER' in cell.value, f"cell {cell.coordinate} formula should include FILTER function"
-        assert 'vgsales!' in cell.value, f"cell {cell.coordinate} formula should include refrence to vgsales Tab"
+        assert 'vgsales!' in cell.value, f"cell {cell.coordinate} formula should include reference to vgsales Tab"
 
 
     def test_EightiesTabTableValues(self):
@@ -42,7 +42,7 @@ class TestEx2(unittest.TestCase):
         prev_rank = 0
         actual_count = 0
         sum_ws = wb_data['Eighties']
-        for row in sum_ws.iter_rows(min_row=2, max_row=sum_ws.max_row):
+        for row in sum_ws.iter_rows(min_row=2, max_row=expected_count + 1):
             rank = row[VideoGameSalesSheetCols.Rank.value - 1].value
             assert prev_rank <= rank, f"'Eighties' tab is not ordered correctly see row {row[0].row}"
             year = row[VideoGameSalesSheetCols.Genre.value - 1].value

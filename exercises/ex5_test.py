@@ -56,8 +56,8 @@ class TestEx5(unittest.TestCase):
                 genre = self.worksheet_data[cell.row][0].value
                 expected_val = 0 if genre not in self.expected_genres_avgs[decade] \
                     else self.expected_genres_avgs[decade][genre]
-                assert expected_val == cell.value, f"Average income in the {decade}'s for genre {genre} should be " \
-                                                   f"{expected_val} but it is {cell.value}"
+                self.assertAlmostEqual(expected_val, cell.value, places=3,
+                    msg=f"Average income in the {decade}'s for genre {genre} should be {expected_val} but it is {cell.value}")
 
     def test_BarCharts(self):
         assert len(self.worksheet_data._charts) > 0, f"'GenrePerDecade' does not contain any chart"

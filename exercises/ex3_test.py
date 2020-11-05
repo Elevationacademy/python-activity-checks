@@ -66,8 +66,9 @@ class TestEx3(unittest.TestCase):
             assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
             assert "SUMIF" in formula_cell.value, f"cell {cell.coordinate} should include SUMIF in its formula"
             genre = row[0].value
-            assert expected_genres_sums[genre] == cell.value, f"Genre {genre} count is {cell.value} but it " \
-                                                              f"should be {expected_genres_sums[genre]}"
+
+            self.assertAlmostEqual(expected_genres_sums[genre], cell.value, places=2,
+                msg=f"Genre {genre} count is {cell.value} but it should be {expected_genres_sums[genre]}")
 
     def test_PieChart(self):
         assert len(self.worksheet_data._charts) > 0, f"'Genres' tab does not contain any chart"
