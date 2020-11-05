@@ -13,7 +13,11 @@ class TestEx4(unittest.TestCase):
         # create the raw data.
         self.expected_platform_sums = {}
         for row in ws_data.iter_rows(min_row=2, max_row=row_count):
-            platform = str(row[VideoGameSalesSheetCols.Platform.value].value)
+            val = row[VideoGameSalesSheetCols.Platform.value].value
+            if type(val) == int or type(val) == float: # the special case of "2600"
+                platform = '2600'
+            else:
+                platform = val
             year = row[VideoGameSalesSheetCols.Year.value].value
             if year not in self.expected_platform_sums.keys():
                 self.expected_platform_sums[year] = {}
@@ -48,8 +52,8 @@ class TestEx4(unittest.TestCase):
                 #                print(cell.coordinate, year, platform)
                 expected_val = 0 if platform not in self.expected_platform_sums[year] else \
                     self.expected_platform_sums[year][platform]
-                assert expected_val == cell.value, f"income on Platform {platform} on year {year} should be {expected_val}" \
-                                                   f"but it is {cell.value}"
+                self.assertAlmostEqual(expected_val, cell.value, places=3,
+                    msg=f"income on Platform {platform} on year {year} should be {expected_val:.2f} but it is {cell.value:.2f}")
 
     def test_TestLineChart(self):
         assert len(self.worksheet_data._charts) > 0, f"'PlatformByYear' does not contain any chart"
