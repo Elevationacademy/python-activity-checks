@@ -51,11 +51,10 @@ class TestEx5(unittest.TestCase):
         for row in self.worksheet_data.iter_rows(min_row=2, max_row=row_count):
             if row[0].value is None:
                 break
-            for cell in row[1:]:
+            for cell in row[1:5]:
                 decade = self.worksheet_data[1][cell.column - 1].value
                 genre = self.worksheet_data[cell.row][0].value
-                expected_val = 0 if genre not in self.expected_genres_avgs[decade] \
-                    else self.expected_genres_avgs[decade][genre]
+                expected_val = 0 if genre not in self.expected_genres_avgs[decade] else self.expected_genres_avgs[decade][genre]
                 self.assertAlmostEqual(expected_val, cell.value, places=3,
                     msg=f"Average income in the {decade}'s for genre {genre} should be {expected_val} but it is {cell.value}")
 
