@@ -7,7 +7,7 @@ wb_data = oxl.load_workbook(workbook_file, read_only=False, data_only=True)
 wb_formulas = oxl.load_workbook(workbook_file, read_only=True, data_only=False)
 ws = wb_formulas['vgsales']
 ws_data = wb_data['vgsales']
-row_count = ws.max_row
+row_count = ws_data.max_row
 
 class VideoGameSalesSheetCols(enum.Enum):
     Rank = 0
