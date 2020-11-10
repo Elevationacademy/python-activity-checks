@@ -58,7 +58,7 @@ class TestEx4(unittest.TestCase):
     def test_TestLineChart(self):
         assert len(self.worksheet_data._charts) > 0, f"'PlatformByYear' does not contain any chart"
         assert len(self.worksheet_data._charts) < 2, f"'PlatformByYear' should have only 1 chart"
-        assert self.worksheet_data._charts[0].tagname == 'scatterChart', f"'PlatformByYear' chart type should be 'line/Scatter chart'"
+        assert self.worksheet_data._charts[0].tagname in ['scatterChart', 'lineChart'], f"'PlatformByYear' chart type should be 'line/Scatter chart'"
 
     def test_ConditionalFormatting(self):
         assert len(self.worksheet_data.conditional_formatting) > 0, f"There is no conditional formatting in tab ,PlatformByYear"
