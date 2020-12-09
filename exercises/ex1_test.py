@@ -30,4 +30,3 @@ class TestEx1(unittest.TestCase):
     def __del__(self):
         if hasattr(self, 'user_db'):
             del self.user_db
-
