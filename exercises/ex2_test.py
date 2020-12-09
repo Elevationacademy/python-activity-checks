@@ -1,43 +1,30 @@
 import unittest
-from .EmployeesWorksheetModel import *
+from CakesDb import *
+
+class TestEx1(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        super(TestEx1, self).__init__(*args, **kwargs)
+        self.user_db = CakesDb("user_cakes_db.sqlite")
+
+    def test_tables_fill(self):
+        expected_query = "SELECT table FROM sqlite_master WHERE name = 'CakeOrders'
 
 
-class TestEx2(unittest.TestCase):
+    def test_names_values(self):
+        expected_query = "SELECT CompanyName, ContactName, Phone from Customers where ContactTitle = 'Owner' and Country = 'Mexico'"
+        actual_query = self.ReadAnswerFile('q1')
+        expected_names, exected_rows = nw.select_query(expected_query)
+        actual_names, actual_rows = nw.select_query(actual_query)
 
-    def test_PivotTablesExistence(self):
-        actual = len(ws_data._pivots)
-        expected = 3
-        assert actual == expected, f"The Employee Worksheet should include {expected} pivot tables, but it include {actual}"
+        assert len(expected_names) == len(actual_names),\
+            f"Wrong number of columns, expecting {len(expected_names)} but it is {len(actual_names)} "
 
-    def assert_pivot_valid(self, pivot_name, expected_subtotal, rowField, colField, dataField = -1):
-        p = None
-        for pt in ws_data._pivots:
-            expected_first_cell = pt.location.ref.split(':')[0]
-            if expected_first_cell == pivot_name:
-                p = pt
-        assert p is not None, f"could not find pivot table named {pivot_name}"
-        ws_src = p.cache.cacheSource.worksheetSource
-        assert 'EmployeesData' in ws_src.sheet, f"Pivot table {pivot_name} is not referencing EmployeesData Sheet"
-        actual_subtotal = p.dataFields[0].subtotal
-        assert actual_subtotal in expected_subtotal, f"Pivot table {pivot_name} sub total " \
-                                                     f"should be {expected_subtotal} but it {actual_subtotal}"
+        assert len(exected_rows) == len(actual_rows),\
+            f"Wrong number of rows,  expecting {len(exected_rows)} but it is {len(actual_rows)} "
 
-        assert len(p.pivotFields) >= 9, "Please make sure that all columns are references by the Pivot Table"
+        assert sorted(expected_names) == sorted(actual_names), \
+            f"Wrong column selected,  expecting {expected_names} but it is {actual_names} "
 
-        assert p.rowFields[0].x == rowField, f"Pivot table {pivot_name} is not using the correct column for the row labels"
-        if colField != -1:
-            assert p.colFields[0].x == colField, f"Pivot table {pivot_name} is not using the correct column for the col labels"
-        if dataField != -1:
-            assert p.dataFields[0].fld == dataField, f"Pivot table {pivot_name} is not using the correct colunm for the Data"
-
-        return p
-
-    def test_DepartmentsCountPivotTable(self):
-        pt = self.assert_pivot_valid('L2', ['count', 'countNums'], 7, 6)
-
-
-    def test_AverageSalaryPivotTable(self):
-        pt = self.assert_pivot_valid('L25', ['average'],6 , 4, 8)
-
-    def test_SalaryBudget(self):
-        pt = self.assert_pivot_valid('L36', ['sum'], 7, -1, 8)
+    def test_orders_values(self):
+        expected_query = "SELECT "
+        actual_query = self.ReadAnswerFile('q2')
