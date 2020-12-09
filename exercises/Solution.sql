@@ -46,6 +46,7 @@ INSERT INTO CakeOrders (OrderID, CustomerID, Name, Age, Address, Cake_Flavor, Ca
 
 SELECT DISTINCT Name FROM CakeOrders WHERE Cake_Flavor='Chocolate';
 
+
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 -- Exercise 4 Answer:
 
@@ -54,12 +55,12 @@ SELECT Name FROM CakeOrders WHERE Cake_Flavor NOT IN ('Fruits', 'Cheese');
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 -- Exercise 5 Answer:
 
-SELECT Name, Address, Cake_Flavor FROM CakeOrders WHERE Adsress LIKE '%Haifa%';
+SELECT Name, Address, Cake_Flavor FROM CakeOrders WHERE Address LIKE '%Haifa%';
 
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 -- Exercise 6 Answer:
 
-SELECT *, Price * 0.85 as PriceAfterDiscount FROM CakeOrders WHERE Cake_Flavor='Chocolate';
+SELECT *, Cake_Price * 0.85 as PriceAfterDiscount FROM CakeOrders WHERE Cake_Flavor='Chocolate';
 
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 -- Exercise 7 Answer:
