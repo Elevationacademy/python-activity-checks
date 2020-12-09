@@ -4,7 +4,6 @@ from .CakesDb import *
 class TestEx7(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestEx7, self).__init__(*args, **kwargs)
-        self.user_db = CakesDb("user_cakes_db.sqlite")
 
     def test_colums_count(self):
         pass

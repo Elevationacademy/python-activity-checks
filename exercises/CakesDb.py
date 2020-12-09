@@ -36,4 +36,6 @@ class CakesDb:
 
 solution_cakes_db = CakesDb('CakesDb.sqlite')
 solution_cakes_db.populateDb(os.path.dirname(__file__) + '/CakesDatabaseSqlite.sql')
+user_cakes_db = CakesDb("user_cakes_db.sqlite")
+
 
