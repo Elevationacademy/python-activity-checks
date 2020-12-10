@@ -9,7 +9,7 @@ class TestEx4(unittest.TestCase):
         self.expected_query = "SELECT Name FROM CakeOrders WHERE Cake_Flavor NOT IN ('Fruits', 'Cheese');"
 
     def test_select_query(self):
-        assert all(x not in self.eval_query.upper() for x in ['DROP', 'DELETE', 'INSERT'])
+        assert all(x not in self.eval_query.upper() for x in ['DROP', 'DELETE', 'INSERT', 'TRUNCATE'])
 
     def test_rows_count(self):
         actual_names, actual_rows = user_cakes_db.select_query(self.eval_query)
