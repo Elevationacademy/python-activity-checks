@@ -17,7 +17,7 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "SUM" in formula_cell.value, f"cell {cell.coordinate} formula should include SUM"
+        assert "SUM" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include SUM"
 
     def test_OrderDetailsCount(self):
         cell_expected_val = 0
@@ -31,7 +31,7 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "SUM" in formula_cell.value, f"cell {cell.coordinate} formula should include SUM"
+        assert "SUM" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include SUM"
 
 
     def test_OrderedItems(self):
@@ -45,7 +45,7 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "COUNT" in formula_cell.value, f"cell {cell.coordinate} formula should include COUNT"
+        assert "COUNT" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include COUNT"
 
 
     def test_AverageCostForOrderedItem(self):
@@ -61,7 +61,7 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "AVERAGE" in formula_cell.value, f"cell {cell.coordinate} formula should include AVERAGE"
+        assert "AVERAGE" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include AVERAGE"
 
 
 
@@ -78,7 +78,7 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "AVERAGE" in formula_cell.value, f"cell {cell.coordinate} formula should include AVERAGE"
+        assert "AVERAGE" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include AVERAGE"
 
     def test_TotalIncome(self):
         cell_expected_val = 0
@@ -91,4 +91,4 @@ class TestEx2(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "SUM" in formula_cell.value, f"cell {cell.coordinate} formula should include SUM"
+        assert "SUM" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include SUM"

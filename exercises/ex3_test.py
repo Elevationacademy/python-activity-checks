@@ -9,7 +9,7 @@ class TestEx3(unittest.TestCase):
             cell = row[BikeStoreSheetCols.OldModel.value]
             formula_cell = ws[cell.coordinate]
             assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-            assert "IF" in formula_cell.value, f"cell {cell.coordinate} formula should include conditional"
+            assert "IF" in formula_cell.value.upper(), f"cell {cell.coordinate} formula should include conditional"
             assert str(cell.row) in formula_cell.value, f"cell {cell.coordinate} should reference row {cell.row}"
             d = row[BikeStoreSheetCols.OrderDate.value].value
             y = row[BikeStoreSheetCols.ModelYear.value].value
@@ -49,5 +49,6 @@ class TestEx3(unittest.TestCase):
         assert cell_actual.font.bold, f"cell {cell_actual.coordinate} style should be Bold"
         formula_cell = ws[cell_actual.coordinate]
         assert formula_cell.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-        assert "COUNTIF" in formula_cell.value or "SUMIF" in formula_cell.value , f"cell {cell.coordinate} formula should contain SUMIF or COUNTIF"
+        assert any(x not in formula_cell.value.upper() for x in ['COUNTIF', 'SUMIF']),\
+            f"cell {cell.coordinate} formula should contain SUMIF or COUNTIF"
         assert str(row_count - 1) in formula_cell.value, f"cell {cell.coordinate} formula should reference row {str(row_count - 1)}"
