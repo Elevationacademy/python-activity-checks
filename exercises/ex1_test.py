@@ -20,7 +20,9 @@ class TestEx1(unittest.TestCase):
             cell = row[BikeStoreSheetCols.LineTotal.value]
             cell_formula = ws[cell.coordinate]
             assert cell_formula.data_type == 'f', f"cell {cell.coordinate} should be a formula"
-            assert cell_formula.value == f'=F{cell.row}*G{cell.row}' or cell_formula == f'=G{cell.row}*F{cell.row}', \
+            f1 = f'=F{cell.row}*G{cell.row}'
+            f2 = f'=G{cell.row}*F{cell.row}'
+            assert cell_formula.value == f1 or cell_formula.value == f2, \
                 f'cell {cell.coordinate} formula is wrong found {cell_formula.value}'
             # or cell_formula == f'=G{cell.row}*F{cell.row}'
             cell_expected_val = \
